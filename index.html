@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+</head>
+<body>
+<h1>メモ on firestore</h1>
+<div id=path></div>
+<textarea id=memo></textarea><br>
+<button id=add>メモ</button>
+<button id=del>削除</button>
+<ul id=list>
+</ul>
+
+<style>
+#memo {
+  width: 90vw;
+  height: 10em;
+}
+</style>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+import { getFirestore, collection, getDocs, setDoc, deleteDoc, doc, query, where } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js'
+import { firebaseConfig } from "./firebaseConfig.js";
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const colname = "list1";
+
+const addItem = (data) => {
+  const title = data.body?.split("\n")[0];
+  const li = document.createElement("li");
+  li.textContent = title;
+  if (list.children.length == 0) {
+    list.appendChild(li);
+  } else {
+    list.insertBefore(li, list.children[0]);
+  }
+  li.onclick = () => {
+    memo.value = data.body;
+    path.textContent = colname + "/" + data.dt;
+    del.onclick = async () => {
+      try {
+        console.log(data);
+        await deleteDoc(doc(db, colname + "/" + data.dt));
+        list.removeChild(li);
+      } catch (e) {
+        alert("error: " + e);
+      }
+    };
+  };
+  console.log(data);
+  del.data = data;
+};
+
+add.onclick = async () => {
+  try {
+    const dt = new Date().getTime();
+    const data = {
+      dt: dt,
+      body: memo.value,
+    };
+    await setDoc(doc(db, colname + "/" + dt.toString()), data);
+    addItem(data);
+  } catch (e) {
+    alert("error: " + e);
+  }
+};
+
+const col = collection(db, colname);
+const snapshot = await getDocs(col);
+const clist = snapshot.docs.map(doc => doc.data());
+for (const c of clist) {
+  addItem(c);
+}
+</script>
+</body></html>
