@@ -1,9 +1,8 @@
 # firememo
 
-A simple memo web application that uses the Firebase Cloud Firestore database.
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
-## Demo
-N/A
+A simple memo web application that uses the Firebase Cloud Firestore database.
 
 ## Features
 - Create, view, and delete memos
