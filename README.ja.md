@@ -1,6 +1,6 @@
 # firememo
 
-Firebase の Cloud Firestore データベースを使ったシンプルなメモアプリです。
+Firebase の Cloud Firestore データベースを使ったシンプルなメモアプリケーションです。
 
 ## 機能
 
@@ -18,6 +18,10 @@ Firebase の Cloud Firestore データベースを使ったシンプルなメモ
 2. [Cloud Firestore](https://firebase.google.com/docs/firestore?hl=ja)を有効化する
 3. `firebaseConfig.js` ファイルを作成する (参考: [`firebaseConfig_template.js`](firebaseConfig_template.js))
 4. ウェブサーバー (例: `live-server`) を起動し、`index.html`を開く
+
+## データ・API
+
+このプロジェクトは Firebase Cloud Firestore APIを使ってメモを保存および取得しています。
 
 ## ライセンス
 

@@ -22,4 +22,4 @@ A simple memo web application that uses the Firebase Cloud Firestore database.
 This project uses the Firebase Cloud Firestore API to store and retrieve memos.
 
 ## License
-MIT License
+MIT License — see [LICENSE](LICENSE).
